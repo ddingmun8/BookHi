@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashActivity">
+    tools:context=".SplashActivity"
+    android:background="@color/nick">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/bookhi_logo"
         android:layout_width="207dp"
         android:layout_height="238dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -15,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.25"
-        app:srcCompat="@drawable/book" />
+        app:srcCompat="@drawable/bookhi_logo" />
 
     <TextView
         android:id="@+id/textView"
@@ -24,8 +25,9 @@
         android:layout_marginTop="20dp"
         android:text="BOOKHI"
         android:textSize="40dp"
-        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/bookhi_logo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

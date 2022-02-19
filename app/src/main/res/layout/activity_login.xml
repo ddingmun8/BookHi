@@ -12,49 +12,75 @@
         android:id="@+id/text_login_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="40dp"
         android:gravity="center"
-        android:text="LOGIN" />
-
-    <ImageView
-        android:id="@+id/img_login_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:srcCompat="@drawable/ic_launcher_foreground" />
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:text="로그인하기" />
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="58dp">
+        android:layout_height="58dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="10dp"
+        android:paddingLeft="15dp"
+        android:text="아이디를 입력해주세요"
+        android:textColor="@color/gray"
+        android:textSize="15dp"
+        android:background="@drawable/login_border"
+        >
     </EditText>
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="58dp">
+        android:layout_height="58dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="40dp"
+        android:paddingLeft="15dp"
+        android:text="비밀번호를 입력해주세요"
+        android:textColor="@color/gray"
+        android:textSize="15dp"
+        android:background="@drawable/login_border"
+        >
     </EditText>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="58dp"
-        android:text="Login">
-    </Button>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:text="Login with Facebook">
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="40dp"
+        android:text="로그인"
+         android:backgroundTint="@color/nick">
     </Button>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:orientation="horizontal"
-        android:weightSum="10">
+        android:weightSum="11">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:gravity="center"
             android:layout_weight="5"
-            android:text="Find ID/PW">
+            android:text="회원정보찾기">
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="|">
         </TextView>
 
         <TextView
@@ -62,11 +88,54 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_weight="5"
-            android:text="Sign Up">
+            android:text="회원가입하기">
         </TextView>
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="80dp"
+        android:padding="40dp"
+        android:orientation="vertical"
+        android:background="@color/light_gray"
+        >
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="SNS 계정으로 로그인하기"></TextView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            >
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/login_naver">
+            </ImageView>
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/login_ka">
+            </ImageView>
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/login_ap">
+            </ImageView>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BookHi">
         <activity
-            android:name=".loginActivity"
+            android:name=".SplashVersion2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"
@@ -23,7 +26,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>

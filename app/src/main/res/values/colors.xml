@@ -10,4 +10,6 @@
     <color name="gray">#787878</color>
     <color name="light_gray">#FAFAFA</color>
     <color name="nick">#FF5722</color>
+    <color name="light_nick">#FFAC92</color>
+    <color name="light_nick_bg">#FFEEE9</color>
 </resources>

@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BookHi">
         <activity
+            android:name=".BookHiMainActivity"
+            android:exported="false" />
+        <activity
             android:name=".SplashVersion2Activity"
             android:exported="false" />
         <activity

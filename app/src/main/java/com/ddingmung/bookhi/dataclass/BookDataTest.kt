@@ -1,12 +1,6 @@
 package com.ddingmung.bookhi.dataclass
 
-data class BookData (
-    val title : String,
-    val publisher : String,
-    val cover : Int
-)
-
-/*data class BookDataTest (
+data class BookDataTest (
     val authors: List<String>,
     val contents: String,
     val datetime: String,
@@ -18,6 +12,5 @@ data class BookData (
     val thumbnail: String,
     val title: String,
     val translators: List<String>,
-    val url: String,
-    val cover : Int
-)*/
+    val url: String
+)

@@ -9,11 +9,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ddingmung.bookhi.R
-import com.ddingmung.bookhi.dataclass.BookData
+import com.ddingmung.bookhi.model.KakaoBook
 
 class BookAdapter (private val context: Context) : RecyclerView.Adapter<BookAdapter.ViewHolder>() {
 
-    var datas = mutableListOf<BookData>()
+    var datas = mutableListOf<KakaoBook>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.search_book_list,parent,false)
         return ViewHolder(view)
@@ -31,10 +31,10 @@ class BookAdapter (private val context: Context) : RecyclerView.Adapter<BookAdap
         private val txtPublisher: TextView = itemView.findViewById(R.id.tv_rv_book_publisher)
         private val imgCover: ImageView = itemView.findViewById(R.id.img_rv_cover)
 
-        fun bind(item: BookData) {
+        fun bind(item: KakaoBook) {
             txtTitle.text = item.title
-            txtPublisher.text = item.publisher.toString()
-            Glide.with(itemView).load(item.cover).into(imgCover)
+            txtPublisher.text = item.publisher
+            Glide.with(itemView).load(item.url).into(imgCover)
 
         }
     }

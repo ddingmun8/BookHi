@@ -5,33 +5,26 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.ddingmung.bookhi.R
-import com.ddingmung.bookhi.dataclass.BookData
-import com.ddingmung.bookhi.dataclass.BookDataTest
-import com.ddingmung.bookhi.functions.ApiInterface
+import com.ddingmung.bookhi.model.KakaoBook
 import com.ddingmung.bookhi.functions.BookAdapter
-import com.ddingmung.bookhi.functions.RetrofitObject
-import com.ddingmung.bookhi.functions.RetrofitService
-import kotlinx.android.synthetic.main.activity_splash.*
-import kotlinx.android.synthetic.main.fragment_reg_book.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.ddingmung.bookhi.viewmodel.MainViewModel
+import com.ddingmung.bookhi.viewmodel.MainViewModelFactory
+import com.ddingmung.bookhi.repository.Repository
+import androidx.lifecycle.Observer
+import kotlinx.android.synthetic.main.fragment_reg_book.view.*
 
 
 class RegBookFragment : Fragment() {
-    //private var _binding: RegBookFragment? = null
-    //private val binding get() = _binding!!
+    private lateinit var viewModel : MainViewModel
 
     lateinit var bookAdapter: BookAdapter
     lateinit var rv_search_book: RecyclerView
-    val datas = mutableListOf<BookData>()
+    val datas = mutableListOf<KakaoBook>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,42 +45,53 @@ class RegBookFragment : Fragment() {
         val regRecyclerView = regView!!.findViewById(R.id.rv_search_book) as RecyclerView
         regRecyclerView.addItemDecoration(DividerItemDecoration(regView!!.context, 1))
 
-        /* 레트로핏*/
-        /*val retrofit = Retrofit.Builder().baseUrl("https://dapi.kakao.com")
-            .addConverterFactory(GsonConverterFactory.create()).build();
-        val service = retrofit.create(RetrofitService::class.java);
+        val repository = Repository()
+        val viewModelFactory = MainViewModelFactory(repository)
+        viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
 
-        service.getBookInfo("KakaoAK aa6e4714d6d7c7d6bdd9833afc755946", "미움")?.enqueue(object : Callback<BookDataTest> {
-            override fun onResponse(call: Call<BookDataTest>, response: Response<BookDataTest>) {
-                if (response.isSuccessful) {
-                    // 정상적으로 통신이 성고된 경우
-                    var result: BookDataTest? = response.body()
-                    Log.d("YMC", "onResponse 성공: " + result?.toString());
-                } else {
-                    // 통신이 실패한 경우(응답코드 3xx, 4xx 등)
-                    Log.d("YMC", "onResponse 실패")
+        regView.btnBookSearch.setOnClickListener {
+            viewModel.searchBook()
+        }
+
+        bookAdapter = BookAdapter(requireContext())
+        rv_search_book.adapter = bookAdapter
+
+        viewModel.myCustomPosts.observe(viewLifecycleOwner, Observer { result ->
+            if(result.isSuccessful){
+                Log.d("test5", "$result")
+                for(i in result.body()!!.documents!!){
+                    Log.d("test5", "$i")
                 }
-            }
+                datas.apply {
+                    println("데어터를 가져 오는 중...")
 
-            override fun onFailure(call: Call<BookDataTest>, t: Throwable) {
-                // 통신 실패 (인터넷 끊킴, 예외 발생 등 시스템적인 이유)
-                Log.d("YMC", "onFailure 에러: " + t.message.toString());
-            }
-        })*/
+                    /*val key = "Your-key"
+                    val url = "http://openapi.seoul.go.kr:8088/"+key+"/json/SeoulLibraryBookRentNumInfo/1/15/"*/
 
-        RetrofitObject.getApiService().getInfo("KakaoAK aa6e4714d6d7c7d6bdd9833afc755946","AB").enqueue(object : Callback<BookDataTest>{
-            override fun onResponse(call: Call<BookDataTest>, response: Response<BookDataTest>) {
-                setResponseText(response.code(), response.body())
-                Toast.makeText(context, "success", Toast.LENGTH_SHORT).show()
-            }
+                    /*add(BookData(cover = R.drawable.bookhi_nick_logo_final, title = "mary", publisher = "mary"))
+                    add(BookData(cover = R.drawable.bookhi_nick_logo_final, title = "jenny", publisher = "mary"))
+                    add(BookData(cover = R.drawable.bookhi_nick_logo_final, title = "jhon", publisher = "mary"))
+                    add(BookData(cover = R.drawable.login_ka, title = "ruby", publisher = "mary"))
+                    add(BookData(cover = R.drawable.login_ap, title = "yuna", publisher = "mary"))
+                    add(BookData(cover = R.drawable.login_ap, title = "yuna", publisher = "mary"))
+                    add(BookData(cover = R.drawable.login_ap, title = "yuna", publisher = "mary"))
+                    add(BookData(cover = R.drawable.login_ap, title = "yuna", publisher = "mary"))
+                    add(BookData(cover = R.drawable.login_ap, title = "yuna", publisher = "mary"))*/
 
-            override fun onFailure(call: Call<BookDataTest>, t: Throwable) {
-                Toast.makeText(context, "fail", Toast.LENGTH_SHORT).show()
-            }
+                    add(KakaoBook(url = result.body()!!.documents?.get(0)!!.url, title = result.body()!!.documents?.get(0)!!.title, publisher = result.body()!!.documents?.get(0)!!.publisher))
 
+                    bookAdapter.datas = datas
+                    bookAdapter.notifyDataSetChanged()
+
+                }
+                //regView.textView.text = result.body()!!.documents?.get(0)!!.url
+            }
+            else{
+                Log.d("test5", "fail")
+            }
         })
 
-        initRecycler()
+        //initRecycler()
 
         return regView
     }
@@ -99,39 +103,6 @@ class RegBookFragment : Fragment() {
                 arguments = Bundle().apply {
                 }
             }
-    }
-
-    private fun setResponseText(resCode:Int, body:BookDataTest?) {
-        // 상태별 text 지정
-        when (resCode) {
-            200 -> {
-                if (body == null) {
-                    Log.d("YMC", "api body가 비어있습니다.")
-                    //"api body가 비어있습니다."
-                } else {
-                    Log.d("YMC", body.toString())
-                    /*if (body.authors.toString() == "[]") {
-                        Log.d("YMC", "api호출은 성공했으나 해당 저자데이터가 없습니다.")
-                        //"api호출은 성공했으나 해당 저자데이터가 없습니다."
-                    } else {
-                        Log.d("YMC", body.toString())
-                        //body.toString()
-                    }*/
-                }
-            }
-            400 -> {
-                "API 키가 만료됬거나 쿼리 파라미터가 잘못 됬습니다."
-            }
-            401 -> {
-                "인증 정보가 정확하지 않습니다."
-            }
-            500 -> {
-                "API 서버에 문제가 발생하였습니다."
-            }
-            else -> {
-                "기타 문제발생..."
-            }
-        }
     }
 
     private fun initRecycler() {

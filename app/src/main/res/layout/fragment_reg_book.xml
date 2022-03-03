@@ -27,7 +27,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnBookSearch"
         tools:listitem="@layout/search_book_list" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 <!--

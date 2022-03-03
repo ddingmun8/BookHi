@@ -59,30 +59,25 @@ class RegBookFragment : Fragment() {
         viewModel.myCustomPosts.observe(viewLifecycleOwner, Observer { result ->
             if(result.isSuccessful){
                 Log.d("test5", "$result")
-                for(i in result.body()!!.documents!!){
-                    Log.d("test5", "$i")
-                }
+                var j : Int = 0
                 datas.apply {
-                    println("데어터를 가져 오는 중...")
-
-                    /*val key = "Your-key"
-                    val url = "http://openapi.seoul.go.kr:8088/"+key+"/json/SeoulLibraryBookRentNumInfo/1/15/"*/
-
-                    /*add(BookData(cover = R.drawable.bookhi_nick_logo_final, title = "mary", publisher = "mary"))
-                    add(BookData(cover = R.drawable.bookhi_nick_logo_final, title = "jenny", publisher = "mary"))
-                    add(BookData(cover = R.drawable.bookhi_nick_logo_final, title = "jhon", publisher = "mary"))
-                    add(BookData(cover = R.drawable.login_ka, title = "ruby", publisher = "mary"))
-                    add(BookData(cover = R.drawable.login_ap, title = "yuna", publisher = "mary"))
-                    add(BookData(cover = R.drawable.login_ap, title = "yuna", publisher = "mary"))
-                    add(BookData(cover = R.drawable.login_ap, title = "yuna", publisher = "mary"))
-                    add(BookData(cover = R.drawable.login_ap, title = "yuna", publisher = "mary"))
-                    add(BookData(cover = R.drawable.login_ap, title = "yuna", publisher = "mary"))*/
-
-                    add(KakaoBook(url = result.body()!!.documents?.get(0)!!.url, title = result.body()!!.documents?.get(0)!!.title, publisher = result.body()!!.documents?.get(0)!!.publisher))
+                    for (i in result.body()!!.documents!!) {
+                        Log.d("test56", "$i")
+                        Log.d("test568", "$i")
+                        Log.d("test567", "" + result.body()!!.documents?.get(j)!!.url)
+                        add(
+                            KakaoBook(
+                                url = result.body()!!.documents?.get(j)!!.url,
+                                title = result.body()!!.documents?.get(j)!!.title,
+                                publisher = result.body()!!.documents?.get(j)!!.publisher
+                            )
+                        )
+                        j++
+                        Log.d("test568", "" + j)
+                    }
 
                     bookAdapter.datas = datas
                     bookAdapter.notifyDataSetChanged()
-
                 }
                 //regView.textView.text = result.body()!!.documents?.get(0)!!.url
             }

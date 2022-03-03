@@ -7,6 +7,6 @@ import retrofit2.Response
 class Repository {
 
     suspend fun searchImage(query : String, sort : String) : Response<BookSearchResponse> {
-        return RetrofitInstance.api.searchBook(query = query, sort = sort, page = 1, size = 5)
+        return RetrofitInstance.api.searchBook(query = query, sort = sort, page = 1, size =50)
     }
 }

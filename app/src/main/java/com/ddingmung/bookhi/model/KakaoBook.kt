@@ -1,6 +1,13 @@
-package com.ddingmung.bookhi.dataclass
+package com.ddingmung.bookhi.model
 
-data class BookDataTest (
+data class KakaoBook (
+    val publisher: String,
+    val title: String,
+    val url: String
+)
+
+/*
+data class KakaoBook (
     val authors: List<String>,
     val contents: String,
     val datetime: String,
@@ -13,4 +20,4 @@ data class BookDataTest (
     val title: String,
     val translators: List<String>,
     val url: String
-)
+)*/

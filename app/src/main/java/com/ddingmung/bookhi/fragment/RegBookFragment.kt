@@ -60,16 +60,23 @@ class RegBookFragment : Fragment() {
             if(result.isSuccessful){
                 Log.d("test5", "$result")
                 var j : Int = 0
+                var inputCntents = ""
                 datas.apply {
                     for (i in result.body()!!.documents!!) {
-                        Log.d("test56", "$i")
-                        Log.d("test568", "$i")
-                        Log.d("test567", "" + result.body()!!.documents?.get(j)!!.url)
+                        Log.d("test5", "$i")
+                        Log.d("test5", "길이 : " + result.body()!!.documents?.get(j)!!.contents.length)
+
+                        if(result.body()!!.documents?.get(j)!!.contents.length > 95){
+                            inputCntents = result.body()!!.documents?.get(j)!!.contents.substring(0,95) + "···"
+                        }else{
+                            inputCntents = result.body()!!.documents?.get(j)!!.contents
+                        }
                         add(
                             KakaoBook(
-                                url = result.body()!!.documents?.get(j)!!.url,
+                                thumbnail = result.body()!!.documents?.get(j)!!.thumbnail,
+                                authors = result.body()!!.documents?.get(j)!!.authors,
                                 title = result.body()!!.documents?.get(j)!!.title,
-                                publisher = result.body()!!.documents?.get(j)!!.publisher
+                                contents = inputCntents
                             )
                         )
                         j++

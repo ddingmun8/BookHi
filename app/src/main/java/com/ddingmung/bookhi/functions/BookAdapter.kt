@@ -27,14 +27,17 @@ class BookAdapter (private val context: Context) : RecyclerView.Adapter<BookAdap
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        private val txtTitle: TextView = itemView.findViewById(R.id.tv_rv_book_title)
-        private val txtPublisher: TextView = itemView.findViewById(R.id.tv_rv_book_publisher)
         private val imgCover: ImageView = itemView.findViewById(R.id.img_rv_cover)
+        private val txtTitle: TextView = itemView.findViewById(R.id.tv_rv_book_title)
+        private val txtAuthors: TextView = itemView.findViewById(R.id.tv_rv_book_authors)
+        private val txtContents: TextView = itemView.findViewById(R.id.tv_rv_book_contents)
+
 
         fun bind(item: KakaoBook) {
+            Glide.with(itemView).load(item.thumbnail).into(imgCover)
             txtTitle.text = item.title
-            txtPublisher.text = item.publisher
-            Glide.with(itemView).load(item.url).into(imgCover)
+            txtAuthors.text = item.authors.toString()
+            txtContents.text = item.contents
 
         }
     }

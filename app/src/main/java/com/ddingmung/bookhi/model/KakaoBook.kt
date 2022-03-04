@@ -1,9 +1,10 @@
 package com.ddingmung.bookhi.model
 
 data class KakaoBook (
-    val publisher: String,
+    val thumbnail: String,
+    val authors: List<String>,
     val title: String,
-    val url: String
+    val contents: String
 )
 
 /*

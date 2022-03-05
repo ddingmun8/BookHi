@@ -4,6 +4,8 @@ plugins {
     id 'kotlin-android-extensions'
 }
 
+apply plugin: 'kotlin-kapt'
+
 def Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
@@ -85,6 +87,11 @@ dependencies {
 
     // ViewModel
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0'
+
+    //Room
+    implementation("androidx.room:room-runtime:2.4.2")
+
+    kapt "androidx.room:room-compiler:2.4.2"
 
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

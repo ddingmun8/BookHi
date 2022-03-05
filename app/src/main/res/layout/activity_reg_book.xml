@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".RegBookActivity">
+
+    <Button
+        android:id="@+id/btnSave"
+        android:text="저장"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/etThumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="이미지"/>
+    <EditText
+        android:id="@+id/etTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="제목"/>
+    <EditText
+        android:id="@+id/etAuthors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="저자"/>
+    <EditText
+        android:id="@+id/etPublisher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="출판사"/>
+    <EditText
+        android:id="@+id/etIsbn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ISBN"/>
+</LinearLayout>

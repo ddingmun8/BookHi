@@ -1,5 +1,6 @@
 package com.ddingmung.bookhi.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.ddingmung.bookhi.R
+import com.ddingmung.bookhi.RegBookActivity
 import com.ddingmung.bookhi.functions.BookAdapter
 import com.ddingmung.bookhi.model.KakaoBook
 import com.ddingmung.bookhi.repository.Repository
@@ -50,6 +52,13 @@ class RegBookFragment : Fragment() {
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
+
+        regView.btnRegDirectly.setOnClickListener {
+            activity?.let{
+                val intent = Intent(context, RegBookActivity::class.java)
+                startActivity(intent)
+            }
+        }
 
         regView.btnBookSearch.setOnClickListener {
             var searchText: String = regView.btnBookSearch.query.toString()

@@ -5,17 +5,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.ddingmung.bookhi.R
-import com.ddingmung.bookhi.model.KakaoBook
 import com.ddingmung.bookhi.functions.BookAdapter
+import com.ddingmung.bookhi.model.KakaoBook
+import com.ddingmung.bookhi.repository.Repository
 import com.ddingmung.bookhi.viewmodel.MainViewModel
 import com.ddingmung.bookhi.viewmodel.MainViewModelFactory
-import com.ddingmung.bookhi.repository.Repository
-import androidx.lifecycle.Observer
+import kotlinx.android.synthetic.main.activity_splash.view.*
 import kotlinx.android.synthetic.main.fragment_reg_book.view.*
 
 
@@ -50,7 +52,9 @@ class RegBookFragment : Fragment() {
         viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
 
         regView.btnBookSearch.setOnClickListener {
-            viewModel.searchBook()
+            var searchText: String = regView.btnBookSearch.query.toString()
+            Log.d("test5", searchText)
+            viewModel.searchBook(searchText)
         }
 
         bookAdapter = BookAdapter(requireContext())

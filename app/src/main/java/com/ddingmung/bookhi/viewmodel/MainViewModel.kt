@@ -12,9 +12,9 @@ class MainViewModel(private val repository : Repository) : ViewModel() {
 
     val myCustomPosts : MutableLiveData<Response<BookSearchResponse>> = MutableLiveData()
 
-    fun searchBook(){
+    fun searchBook(query: String){
         viewModelScope.launch {
-            val response = repository.searchImage("미움받을 용기","accuracy")
+            val response = repository.searchImage(query,"accuracy")
             myCustomPosts.value = response
         }
     }

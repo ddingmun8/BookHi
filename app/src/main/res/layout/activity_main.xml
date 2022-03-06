@@ -35,18 +35,21 @@
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/light_nick"
             android:text="main"/>
         <Button
             android:id="@+id/btnRegBook"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/light_nick"
             android:text="add"/>
         <Button
             android:id="@+id/btnShowMyPage"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/light_nick"
             android:text="myPage"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

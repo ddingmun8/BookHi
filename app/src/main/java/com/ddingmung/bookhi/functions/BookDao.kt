@@ -15,4 +15,7 @@ interface BookDao {
 
     @Query("SELECT title FROM BookInfo")
     fun getTitle(): List<String>
+
+    /*@Query("SELECT * FROM BookInfo order by bookId limit 5")
+    fun getTopBookList(): List<String>*/
 }

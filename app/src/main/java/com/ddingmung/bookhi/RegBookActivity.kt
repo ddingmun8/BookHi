@@ -32,9 +32,11 @@ class RegBookActivity : AppCompatActivity() {
         btnSave.setOnClickListener {
             if (etTitle.text.isNotEmpty()){
                 regBook()
+                //if문으로 성공일 때 Toast 추가해야해
+                Toast.makeText(this, "저장되었습니다.", Toast.LENGTH_SHORT).show()
                 Log.d("testDB", db.getDao().getAll().toString())
                 Log.d("testDB", db.getDao().getTitle().toString())
-
+                finish()
             }else{
                 Toast.makeText(this, "제목은 필수 입력 사항입니다.", Toast.LENGTH_SHORT).show()
             }

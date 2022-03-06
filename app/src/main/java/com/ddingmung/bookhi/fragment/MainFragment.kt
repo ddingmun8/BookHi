@@ -14,9 +14,11 @@ import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.ddingmung.bookhi.R
+import com.ddingmung.bookhi.functions.BookDB
 import kotlinx.android.synthetic.main.book_list.view.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlin.math.abs
@@ -24,6 +26,8 @@ import kotlin.math.abs
 lateinit var navController: NavController
 
 class MainFragment : Fragment(){
+    lateinit var db: BookDB
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -53,6 +57,20 @@ class MainFragment : Fragment(){
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        //DB 생성
+        db = Room.databaseBuilder(requireActivity(), BookDB::class.java, "BookDB").allowMainThreadQueries().build()
+
+        var arrTitle = db.getDao().getTitle().toString().split(",")
+        Log.d("test66" , arrTitle.toString())
+        Log.d("test66" , arrTitle.size.toString())
+        /*var lTitle= arrayListOf(
+            "ttt",
+            "sss",
+            for(i:Int in arrTitle.size){
+                arrTitle.get(i).toString()
+            }
+        )*/
+
         // Adapter를 생성하면서 넘길 색상이 담긴 ArrayList<Int> 생성
         var bgColors = arrayListOf<Int>(
             R.color.gray,
@@ -63,7 +81,7 @@ class MainFragment : Fragment(){
         )
 
         // RecyclerView.Adapter<PagerViewHolder>()
-        viewPager.adapter = PagerRecyclerAdapter(bgColors)
+        viewPager.adapter = PagerRecyclerAdapter(bgColors, arrTitle)
         // 관리하는 페이지 수. default = 1
         viewPager.offscreenPageLimit = 4
         // item_view 간의 양 옆 여백을 상쇄할 값
@@ -93,15 +111,18 @@ class MainFragment : Fragment(){
     }
 }
 
-class PagerRecyclerAdapter(private val bgColors: ArrayList<Int>) : RecyclerView.Adapter<PagerRecyclerAdapter.PagerViewHolder>() {
-
+class PagerRecyclerAdapter(private val bgColors: ArrayList<Int>, private val lTitle: List<String>) : RecyclerView.Adapter<PagerRecyclerAdapter.PagerViewHolder>() {
     inner class PagerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
         private val pageName: TextView = itemView.findViewById(R.id.pageName)
+        private val title: TextView = itemView.findViewById(R.id.title)
 
         fun bind(@ColorRes bgColor: Int, position: Int) {
             pageName.text = "Page ${position+1}"
             pageName.setBackgroundColor(ContextCompat.getColor(pageName.context, bgColor))
+        }
+
+        fun bindTitle(s: String, position: Int) {
+            title.text = lTitle[position]
         }
     }
 
@@ -114,10 +135,10 @@ class PagerRecyclerAdapter(private val bgColors: ArrayList<Int>) : RecyclerView.
         return PagerViewHolder(view)
     }
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
-        holder.bind(bgColors[position], position)
+        //holder.bind(bgColors[position], position)
+        holder.bindTitle(lTitle[position], position)
     }
 
-    override fun getItemCount(): Int = bgColors.size
+    override fun getItemCount(): Int = lTitle.size
 
 }
-

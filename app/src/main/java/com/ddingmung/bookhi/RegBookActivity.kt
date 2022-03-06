@@ -1,6 +1,11 @@
 package com.ddingmung.bookhi
 
 import android.content.Intent
+import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteOpenHelper
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,9 +16,11 @@ import androidx.room.Room
 import com.ddingmung.bookhi.functions.BookDB
 import com.ddingmung.bookhi.model.BookInfo
 import kotlinx.android.synthetic.main.activity_reg_book.*
+import java.io.ByteArrayOutputStream
 
 class RegBookActivity : AppCompatActivity() {
     lateinit var db: BookDB
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reg_book)
@@ -26,6 +33,7 @@ class RegBookActivity : AppCompatActivity() {
             if (etTitle.text.isNotEmpty()){
                 regBook()
                 Log.d("testDB", db.getDao().getAll().toString())
+                Log.d("testDB", db.getDao().getTitle().toString())
 
             }else{
                 Toast.makeText(this, "제목은 필수 입력 사항입니다.", Toast.LENGTH_SHORT).show()
@@ -35,8 +43,18 @@ class RegBookActivity : AppCompatActivity() {
 
     }
 
+    private fun drawableToByteArray(drawable: Drawable?): ByteArray?{
+        val bitmapDrawable = drawable as BitmapDrawable?
+        val bitmap = bitmapDrawable?.bitmap
+        val stream = ByteArrayOutputStream()
+        bitmap?.compress(Bitmap.CompressFormat.PNG, 100, stream)
+        val byteArray = stream.toByteArray()
+
+        return byteArray
+    }
+
     fun regBook(){
         val bookId = db.getDao().getTitle().size + 1
-        db.getDao().insertBook(BookInfo(bookId, etThumbnail.text.toString(), etTitle.text.toString(), etAuthors.text.toString(), etPublisher.text.toString(), etIsbn.text.toString()))
+        db.getDao().insertBook(BookInfo(bookId, drawableToByteArray(imgThumbnail.drawable), etTitle.text.toString(), etAuthors.text.toString(), etPublisher.text.toString(), etIsbn.text.toString()))
     }
 }

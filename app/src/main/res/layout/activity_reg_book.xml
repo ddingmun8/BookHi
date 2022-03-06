@@ -4,33 +4,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".RegBookActivity">
 
     <Button
         android:id="@+id/btnSave"
         android:text="저장"
+        android:textStyle="bold"
+        android:backgroundTint="@color/light_nick"
+        android:layout_marginBottom="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <EditText
-        android:id="@+id/etThumbnail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="이미지"/>
+    <ImageView
+        android:id="@+id/imgThumbnail"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center"
+        android:padding="80dp"
+        android:layout_marginBottom="15dp"
+        android:src="@drawable/image"
+        android:background="@drawable/login_border"/>
+
     <EditText
         android:id="@+id/etTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
         android:hint="제목"/>
     <EditText
         android:id="@+id/etAuthors"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
         android:hint="저자"/>
     <EditText
         android:id="@+id/etPublisher"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
         android:hint="출판사"/>
     <EditText
         android:id="@+id/etIsbn"

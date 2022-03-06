@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class BookInfo(
     @PrimaryKey val bookId: Int?,
-    @ColumnInfo var thumbnail: String,
+    @ColumnInfo var thumbnail: ByteArray?,
     @ColumnInfo var title: String,
     @ColumnInfo var authors: String,
     @ColumnInfo var publisher: String,

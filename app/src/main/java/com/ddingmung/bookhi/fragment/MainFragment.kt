@@ -60,7 +60,7 @@ class MainFragment : Fragment(){
         //DB 생성
         db = Room.databaseBuilder(requireActivity(), BookDB::class.java, "BookDB").allowMainThreadQueries().build()
 
-        var arrTitle = db.getDao().getTitle().toString().split(",")
+        var arrTitle = db.getDao().getTitle().toString().replace("[", "").replace("]","").split(",")
         Log.d("test66" , arrTitle.toString())
         Log.d("test66" , arrTitle.size.toString())
         /*var lTitle= arrayListOf(
@@ -122,7 +122,7 @@ class PagerRecyclerAdapter(private val bgColors: ArrayList<Int>, private val lTi
         }
 
         fun bindTitle(s: String, position: Int) {
-            title.text = lTitle[position]
+            title.text = "제목 : " + lTitle[position]
         }
     }
 

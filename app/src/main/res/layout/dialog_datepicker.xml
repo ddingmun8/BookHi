@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pickers"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_weight="2"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:weightSum="3">
+
+        <!-- Year -->
+        <NumberPicker
+            android:id="@+id/yearpicker_datepicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dip"
+            android:layout_marginEnd="1dip"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_weight="1"
+            />
+
+        <!-- Month -->
+        <NumberPicker
+            android:id="@+id/monthpicker_datepicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dip"
+            android:layout_marginEnd="1dip"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_weight="1"
+            />
+
+        <!-- Day -->
+        <NumberPicker
+            android:id="@+id/daypicker_datepicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dip"
+            android:layout_marginEnd="1dip"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_weight="1"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:weightSum="2">
+        <Button
+            android:id="@+id/cancel_button_datepicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="right"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:text="취소"
+            android:textStyle="bold"
+            android:backgroundTint="@color/light_nick"/>
+
+        <Button
+            android:id="@+id/save_button_datepicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="right"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:text="저장"
+            android:textStyle="bold"
+            android:backgroundTint="@color/light_nick"/>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+<!--<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <NumberPicker
+        android:id="@+id/startYearPicker"
+        android:layout_width="63dp"
+        android:layout_height="124dp"/>
+    <NumberPicker
+        android:id="@+id/startMonthPicker"
+        android:layout_width="63dp"
+        android:layout_height="124dp"
+        android:layout_marginStart="50dp"/>
+</LinearLayout>-->
+
+
+
+
+    <!--<DatePicker android:id="@+id/startDtPicker"
+        android:datePickerMode="spinner"
+        android:calendarViewShown="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>-->
+
+    <!--<DatePicker android:id="@+id/dpSpinner" android:datePickerMode="spinner" android:calendarViewShown="false" android:layout_width="wrap_content" android:layout_height="wrap_content"/>-->
+

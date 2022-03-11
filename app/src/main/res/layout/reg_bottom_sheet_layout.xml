@@ -80,7 +80,6 @@
 
     </LinearLayout>
 
-    <!--<DatePicker android:id="@+id/dpSpinner" android:datePickerMode="spinner" android:calendarViewShown="false" android:layout_width="wrap_content" android:layout_height="wrap_content"/>-->
 
     <TextView
         android:layout_width="match_parent"
@@ -103,7 +102,7 @@
         android:layout_height="30dp"
         android:stepSize="0.5"/>
 
-    <TextView
+    <!--<TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -120,6 +119,17 @@
         android:id="@+id/etMemo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/light_nick"/>-->
+
+    <Button
+        android:id="@+id/btnSaveBook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="right"
+        android:textColor="@color/white"
+        android:text="저장"
+        android:textStyle="bold"
         android:backgroundTint="@color/light_nick"/>
 
 </LinearLayout>

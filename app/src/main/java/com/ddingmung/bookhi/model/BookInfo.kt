@@ -15,8 +15,8 @@ data class BookInfo(
     @ColumnInfo var isbn: String,
 
     /*내가 기록한 정보*/
-    /*@ColumnInfo var startDt: String,
+    @ColumnInfo var startDt: String,
     @ColumnInfo var endDt: String,
-    @ColumnInfo var memo: String,
-    @ColumnInfo var rate: Double*/
+    @ColumnInfo var rate: String
+    //@ColumnInfo var memo: String
 )

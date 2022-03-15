@@ -219,6 +219,6 @@ class RegBookActivity : AppCompatActivity() {
         Toast.makeText(this, "저장되었습니다.", Toast.LENGTH_SHORT).show()
         Log.d("testDB", db.getDao().getAll().toString())
         Log.d("testDB", db.getDao().getTitle().toString())
-        Log.d("testDB", db.getDao().getStartDt().toString())
+        Log.d("testDB", db.getDao().getreadDt().toString())
     }
 }

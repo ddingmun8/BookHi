@@ -28,10 +28,6 @@ lateinit var navController: NavController
 class MainFragment : Fragment(){
     lateinit var db: BookDB
 
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -61,6 +57,8 @@ class MainFragment : Fragment(){
         db = Room.databaseBuilder(requireActivity(), BookDB::class.java, "BookDB").allowMainThreadQueries().build()
 
         var arrTitle = db.getDao().getTitle().toString().replace("[", "").replace("]","").split(",")
+        var arrDate = db.getDao().getreadDt().toString().replace("[", "").replace("]","").split(",")
+        var arrRate = db.getDao().getRate().toString().replace("[", "").replace("]","").split(",")
         Log.d("test66" , arrTitle.toString())
         Log.d("test66" , arrTitle.size.toString())
         /*var lTitle= arrayListOf(
@@ -81,7 +79,7 @@ class MainFragment : Fragment(){
         )
 
         // RecyclerView.Adapter<PagerViewHolder>()
-        viewPager.adapter = PagerRecyclerAdapter(bgColors, arrTitle)
+        viewPager.adapter = PagerRecyclerAdapter(bgColors, arrTitle, arrDate, arrRate)
         // 관리하는 페이지 수. default = 1
         viewPager.offscreenPageLimit = 4
         // item_view 간의 양 옆 여백을 상쇄할 값
@@ -111,10 +109,12 @@ class MainFragment : Fragment(){
     }
 }
 
-class PagerRecyclerAdapter(private val bgColors: ArrayList<Int>, private val lTitle: List<String>) : RecyclerView.Adapter<PagerRecyclerAdapter.PagerViewHolder>() {
+class PagerRecyclerAdapter(private val bgColors: ArrayList<Int>, private val lTitle: List<String>, private val lDate: List<String>, private val lRate: List<String>) : RecyclerView.Adapter<PagerRecyclerAdapter.PagerViewHolder>() {
     inner class PagerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val pageName: TextView = itemView.findViewById(R.id.pageName)
         private val title: TextView = itemView.findViewById(R.id.title)
+        private val bookDate: TextView = itemView.findViewById(R.id.bookDate)
+        private val bookRate: TextView = itemView.findViewById(R.id.bookRate)
 
         fun bind(@ColorRes bgColor: Int, position: Int) {
             pageName.text = "Page ${position+1}"
@@ -123,6 +123,27 @@ class PagerRecyclerAdapter(private val bgColors: ArrayList<Int>, private val lTi
 
         fun bindTitle(s: String, position: Int) {
             title.text = "제목 : " + lTitle[position]
+        }
+
+        fun bindDate(s: String, position: Int) {
+            bookDate.text = "날짜 : " + lDate[position]
+        }
+
+        fun bindRate(s: String, position: Int) {
+            if(lRate[position].trim() == "1.0"){
+                bookRate.text = "평점 : ★☆☆☆☆ [" + lRate[position] + "점]"
+            }else if(lRate[position].trim() == "2.0"){
+                bookRate.text = "평점 : ★★☆☆☆ [" + lRate[position] + "점]"
+            }else if(lRate[position].trim() == "3.0"){
+                bookRate.text = "평점 : ★★★☆☆ [" + lRate[position] + "점]"
+            }else if(lRate[position].trim() == "4.0"){
+                bookRate.text = "평점 : ★★★★☆ [" + lRate[position] + "점]"
+            }else if(lRate[position].trim() == "5.0"){
+                bookRate.text = "평점 : ★★★★★ [" + lRate[position] + "점]"
+            }else{
+                bookRate.text = "평점 : ★★★★★ [test " + lRate[position] + "점]"
+            }
+            
         }
     }
 
@@ -137,6 +158,8 @@ class PagerRecyclerAdapter(private val bgColors: ArrayList<Int>, private val lTi
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
         //holder.bind(bgColors[position], position)
         holder.bindTitle(lTitle[position], position)
+        holder.bindDate(lDate[position], position)
+        holder.bindRate(lRate[position], position)
     }
 
     override fun getItemCount(): Int = lTitle.size

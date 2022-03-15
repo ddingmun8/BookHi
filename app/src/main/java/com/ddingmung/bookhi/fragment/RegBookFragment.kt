@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ddingmung.bookhi.R
 import com.ddingmung.bookhi.RegBookActivity
 import com.ddingmung.bookhi.functions.BookAdapter
+import com.ddingmung.bookhi.model.BookInfo
 import com.ddingmung.bookhi.model.KakaoBook
 import com.ddingmung.bookhi.repository.Repository
 import com.ddingmung.bookhi.viewmodel.MainViewModel
@@ -33,6 +34,7 @@ class RegBookFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
+
         }
     }
 
@@ -64,6 +66,9 @@ class RegBookFragment : Fragment() {
             var searchText: String = regView.btnBookSearch.query.toString()
             Log.d("test5", searchText)
             viewModel.searchBook(searchText)
+
+            //새로 검색하면 리스트 초기화
+            bookAdapter.datas.clear()
         }
 
         bookAdapter = BookAdapter(requireContext())
@@ -71,13 +76,13 @@ class RegBookFragment : Fragment() {
 
         viewModel.myCustomPosts.observe(viewLifecycleOwner, Observer { result ->
             if(result.isSuccessful){
-                Log.d("test5", "$result")
+                //Log.d("test5", "$result")
                 var j : Int = 0
                 var inputCntents = ""
                 datas.apply {
                     for (i in result.body()!!.documents!!) {
-                        Log.d("test5", "$i")
-                        Log.d("test5", "길이 : " + result.body()!!.documents?.get(j)!!.contents.length)
+                        //Log.d("test5", "$i")
+                        //Log.d("test5", "길이 : " + result.body()!!.documents?.get(j)!!.contents.length)
 
                         if(result.body()!!.documents?.get(j)!!.contents.length > 95){
                             inputCntents = result.body()!!.documents?.get(j)!!.contents.substring(0,95) + "···"
@@ -93,7 +98,7 @@ class RegBookFragment : Fragment() {
                             )
                         )
                         j++
-                        Log.d("test568", "" + j)
+                        //Log.d("test568", "" + j)
                     }
 
                     bookAdapter.datas = datas
@@ -102,8 +107,16 @@ class RegBookFragment : Fragment() {
                 //regView.textView.text = result.body()!!.documents?.get(0)!!.url
             }
             else{
-                Log.d("test5", "fail")
+                //Log.d("test5", "fail")
             }
+
+            bookAdapter.setItemClickListener(object: BookAdapter.OnItemClickListener{
+                override fun onClick(v: View, position: Int) {
+                    // 클릭 시 이벤트 작성
+                    Log.d("test5678", "${datas[position].title}")
+                }
+            })
+
         })
 
         //initRecycler()
